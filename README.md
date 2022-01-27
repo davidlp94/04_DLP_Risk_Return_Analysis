@@ -136,6 +136,100 @@ Out of the four whale funds, Berkshire Hathaway poses the most risk since the ro
 
 ### Part 4 - Analyzing the Risk-Return Profile
 
+In this section, we will determine the overall risk of an asset using the Sharpe Ratio and use the .plot() function to generate a bar chart.
+
+```
+trading_days = 252
+average_annual_return = daily_returns.mean() * trading_days
+average_annual_return.sort_values()
+
+sharpe_ratios = average_annual_return/annual_std_dev
+sharpe_ratios.sort_values()
+
+sharpe_ratios.sort_values().plot(kind='bar', figsize=(15, 7), title='Sharpe Ratio of Whale Funds and S&P 500', xlabel='Asset', ylabel='Sharpe Ratio')
+```
+![image](https://user-images.githubusercontent.com/96163075/151418683-b1e96458-afa5-427b-8c76-2524038cdbe8.png)
+
+Berkshire Hathaway offers the best risk-return profile due to its Sharpe Ratio. Because Berkshire has a smaller annual std. dev, the Sharpe Ratio is greater than the S&P500. The worst risk-return fund is Paulson & Co. Inc due to it's negative Sharpe Ratio. (Paulson & Co. had a negative annual avergae return).
+
+---
+
+### Part 5 - Diversifying the Portfolio
+
+Finally, using the infoormation above, we can choose two invstment funds to evaluate to potentially add to our portfolio. In tis case, we will choose Berkshire and Tiger. Using the Pandas module, we can use the .var() and .cov() functions to calculate the variance, covariance and compare each fund's beta with the overall market (S&P 500).
+
+```
+sp_500_roll = daily_returns['S&P 500'].rolling(window=60)
+sp_500_var = sp_500_roll.var().dropna()
+
+berkshire_cov = daily_returns['BERKSHIRE HATHAWAY INC'].rolling(window=60).cov(daily_returns['S&P 500']).dropna()
+
+berkshire_beta = berkshire_cov/sp_500_var
+
+berkshire_beta.mean()
+
+berkshire_beta.plot(figsize=(15, 7), title='60-Day Rolling Beta of Berkshire Hathaway', ylabel='Rolling Beta')
+```
+
+![image](https://user-images.githubusercontent.com/96163075/151426218-9ab6e903-0b9e-48a8-ae4f-cf2f049998e2.png)
+
+```
+tiger_cov = daily_returns['TIGER GLOBAL MANAGEMENT LLC'].rolling(window=60).cov(daily_returns['S&P 500'])
+
+tiger_beta = tiger_cov/sp_500_var
+
+tiger_beta.mean()
+
+tiger_beta.plot(figsize=(15, 7), title='Rolling 60-Day Beta of Tiger Global Management LLC', ylabel='Rolling Beta')
+```
+
+![image](https://user-images.githubusercontent.com/96163075/151426386-b99f8ad8-98cd-4f4a-9665-0d531f6e909e.png)
+
+---
+
+### Final Analysis
+Berkshire Hathaway is more sensitive to movements in the S&P 500 with a Beta of 0.221 which is much higher than Tiger's Beta of 0.030.
+
+Out of the four whale funds, I recommend adding Berkshire Hathaway to the portfolio because of it's high Beta and most investment potential. Please note, this fund is more riskier than Tiger because Berkshire Hathaway's fund is much more volatile than Tiger. However, Berkshire Hathaway has the most investment potential.
+
+---
+
+## Contributors
+
+David Lee Ping
+
+email: davidleeping@gmail.com
+
+Phone: 570.269.5973
+
+LinkedIn: TBD
+
+---
+
+## License
+
+MIT License
+
+Copyright (c) [2022] [David Lee Ping]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 
 
 
