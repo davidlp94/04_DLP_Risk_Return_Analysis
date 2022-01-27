@@ -110,9 +110,31 @@ Based on the box plot above, the most volatile fund was Berkshire Hathwaway Inc 
 
 ---
 
+### Part 3 - Analyzing the Risk
 
+In this section, we will evaluate the risk of each investment fund using the Pandas by calulating the standard deviation using the .std() function as well as calculating the annualized standardized deviation using the np.sqrt() function. Finally, using the .rolling() function, we can plot the rolling standard deviation using a 21-day rolling window.
 
+```
+standard_deviation = daily_returns.std().sort_values()
+standard_deviation
 
+trading_days = 252
+annual_std_dev = standard_deviation * np.sqrt(trading_days)
+annual_std_dev.sort_values()
+
+daily_returns.rolling(window=21).std().plot(figsize=(15, 7), title='Rolling 21-Day Standard Deviation', ylabel='Rolling 21-Day Std. Dev.')
+
+daily_return_whale_funds.rolling(window=21).std().plot(figsize=(15, 7), title='Rolling 21-Day Standard Deviation', ylabel='Rolling 21-Day Std. Dev.')
+```
+The following plots are generated:
+![image](https://user-images.githubusercontent.com/96163075/151417614-93f565e1-2cd3-4533-a1f1-a335586cb35e.png)
+![image](https://user-images.githubusercontent.com/96163075/151417662-96a984b2-f7b8-4b1c-bf55-19a3d0a679a3.png)
+
+Out of the four whale funds, Berkshire Hathaway poses the most risk since the rolling standard deviation is by far the greatest throughout the timeframe. However, between 2019 and 2020, Paulson & Co. Inc. posed more of a risk a few times throughout this period. The flash-crash of 2020 skews the data a bit, but over time, and after the flash-crash, Berkshire Hathaway still remians the highest risk due to the rolling standard deviation over time while the other three funds gradually returns back to their mean standard deviation.
+
+---
+
+### Part 4 - Analyzing the Risk-Return Profile
 
 
 
