@@ -2,6 +2,8 @@
 ## Introduction
 This application is used to determine (4) different investment funds with the most potential. The investment funds that are being analyzed are Soros Fund Management, Paulson & Co. Inc., Tiger Global Management and Berkshire Hathaway Inc along with analysis of the S&P 500 index. This application will use several key-risk management metrics such as daily percent change, standard deviation, Sharpe ratio and Beta.
 
+Live application link: https://github.com/davidlp94/04_DLP_Risk_Return_Analysis/blob/main/risk_return_analysis.ipynb
+
 ---
 
 ## Technologies
